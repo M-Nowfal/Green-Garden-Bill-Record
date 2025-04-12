@@ -48,10 +48,10 @@ export const UserRegistration = () => {
     };
 
     useEffect(() => {
-        if(!admin) {
-            toast.error("Only admin can access this page, If you are new User ask the admin to register you");
-            navigate("/");
-        }
+        // if(!admin) {
+        //     toast.error("Only admin can access this page, If you are new User ask the admin to register you");
+        //     navigate("/");
+        // }
         inputs.current[0]?.focus();
     }, []);
 
