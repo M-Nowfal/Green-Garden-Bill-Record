@@ -88,7 +88,7 @@ export const verifyRegistrationOtp = async (req, res, next) => {
 
 export const validate = async (req, res, next) => {
     try {
-        res.status(200).json({ verified: true });
+        res.status(200).json({ message: "Validation Failed", verified: true });
     } catch (err) {
         next(err);
     }

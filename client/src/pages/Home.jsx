@@ -11,7 +11,7 @@ import { User } from './User';
 
 export const Home = () => {
 
-    const { theme, currentActiveIcon, setCurrentActiveIcon  } = useContext(AppContext);
+    const { theme, currentActiveIcon, setCurrentActiveIcon } = useContext(AppContext);
     const navigate = useNavigate();
     const [page, setPage] = useState(null);
 
@@ -24,10 +24,10 @@ export const Home = () => {
                     navigate("/login");
                 }
             } catch (err) {
-                if (!err.response?.data?.verified) {
-                    toast.error(err.response?.data?.message);
-                    navigate("/login");
-                }
+                const msg = err.response?.data?.error || err.response?.data?.message || "Something went wrong";
+                toast.error(msg);
+                console.log(err.message);
+                navigate("/login");
             }
         }
         getUserToken();

@@ -16,6 +16,7 @@ app.use(cors({
     origin: "https://housing-unit-bill-record.vercel.app",
     credentials: true
 }));
+
 app.options("*", cors({
     origin: "https://housing-unit-bill-record.vercel.app",
     credentials: true
