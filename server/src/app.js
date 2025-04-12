@@ -12,7 +12,7 @@ import buildingRouter from "./routes/building-routes.js";
 const app = express();
 
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: "https://housing-unit-bill-record.vercel.app",
     credentials: true
 }));
 app.use(express.json());
