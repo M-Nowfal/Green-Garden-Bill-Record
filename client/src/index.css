@@ -1,0 +1,61 @@
+* {
+    transition: 0.25s;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.light-theme {
+    background: linear-gradient(130deg, rgb(122, 193, 255), rgb(203, 231, 255));
+}
+
+.dark-theme {
+    background: linear-gradient(120deg, rgb(0, 0, 0), rgba(0, 0, 26, 0.904));
+}
+
+.cursor-pointer:hover {
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.bg-alice {
+    background: linear-gradient(7deg, rgb(122, 193, 255), rgb(203, 231, 255));
+    color: black !important;
+}
+
+.bg-black {
+    background: linear-gradient(7deg, rgb(0, 0, 0), rgba(0, 0, 48, 0.807));
+    color: aliceblue !important;
+}
+
+.text-alice {
+    color: rgb(181, 221, 255);
+}
+
+.link {
+    text-decoration: none;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+.rotate:hover {
+    cursor: pointer;
+    animation: rotation  1s ease-in-out;
+    color: grey;
+}
+
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

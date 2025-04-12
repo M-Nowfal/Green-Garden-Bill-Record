@@ -1,0 +1,31 @@
+.blockName {
+    font-size: 60px;
+    width: fit-content;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.797), 0px 0px 10px aliceblue;
+}
+
+.blockName:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+.tableHeadLight {
+    background: linear-gradient(180deg, black, blue);
+    color: aliceblue;
+}
+.tableHeadDark {
+    background: linear-gradient(180deg, black, violet);
+    color: aliceblue;
+}
+.btn {
+    margin: 0 2rem;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0px 0px 3px blue, 0px 0px 6px violet;
+    padding: 5px 20px;
+}
+.btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 0px 5px blue, 0px 0px 10px violet;
+}

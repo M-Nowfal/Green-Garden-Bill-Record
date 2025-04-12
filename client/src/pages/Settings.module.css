@@ -1,0 +1,19 @@
+.settingsLight {
+    color: black;
+}
+
+.settingsDark {
+    color: aliceblue;
+}
+
+.settingsTogglerContainer {
+    position: absolute;
+    right: 10px;
+    transform: translateY(-48px);
+}
+
+.backBtn {
+    position: absolute;
+    top: 0px;
+    transform: translateX(-45px);
+}

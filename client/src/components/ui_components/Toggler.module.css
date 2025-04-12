@@ -1,0 +1,64 @@
+.togglerContainer {
+    position: absolute;
+    right: 20px;
+    transform: translateY(20px);
+    z-index: 2;
+}
+
+.toggleOffLight,
+.toggleOffDark {
+    width: 40px;
+    height: 20px;
+    border-radius: 30px;
+    border: none;
+}
+
+.toggleOffLight {
+    outline: 2px solid black;
+    box-shadow: 0px 0px 7px aliceblue;
+}
+
+.toggleOffDark {
+    outline: 2px solid aliceblue;
+    box-shadow: 0px 0px 7px rgb(0, 0, 0);
+}
+
+.toggleOn {
+    width: 40px;
+    height: 20px;
+    border-radius: 30px;
+    border: none;
+    outline: 2px solid green;
+    box-shadow: 0px 0px 5px aliceblue;
+    background-color: green;
+}
+
+.togglerCircleOffLight,
+.togglerCircleOffDark {
+    position: absolute;
+    width: 17px;
+    height: 16px;
+    border-radius: 50%;
+    left: 2px;
+    transform: translateY(2px);
+}
+
+.togglerCircleOffLight {
+    background-color: black;
+    box-shadow: 0px 0px 5px black;
+}
+.togglerCircleOffDark {
+    background-color: aliceblue;
+    box-shadow: 0px 0px 5px rgb(106, 186, 255);
+}
+
+.togglerCircleOn {
+    position: absolute;
+    width: 17px;
+    height: 16px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 50%;
+    left: 20px;
+    transform: translateY(2px);
+    box-shadow: 0px 0px 7px aliceblue;
+}

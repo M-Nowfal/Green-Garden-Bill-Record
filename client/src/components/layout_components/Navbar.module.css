@@ -1,0 +1,99 @@
+.navbarContainer {
+    position: fixed;
+}
+
+.navbarContainerLight {
+    background: linear-gradient(150deg, white, rgba(153, 207, 255, 0.875));
+    box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.866), inset 0px 0px 5px rgba(0, 0, 0, 0.855);
+}
+
+.navbarContainerDark {
+    background: linear-gradient(150deg, rgb(0, 11, 49), rgba(0, 0, 0, 0.875));
+    box-shadow: 0px 0px 7px rgb(196, 226, 252), inset 0px 0px 5px aliceblue;
+}
+
+@media (max-width: 767px) {
+    .navbarContainer {
+        display: flex;
+        width: 100%;
+        height: 60px;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 0;
+        border-radius: 30px 30px 0 0;
+    }
+    .navbarIconContainer {
+        flex-direction: row;
+        min-width: 100%;
+        padding: 0 30px;
+    }
+}
+
+@media (min-width: 768px) {
+    .navbarContainer {
+        width: fit-content;
+        padding: 0 15px;
+        height: 50%;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        border-radius: 30px 0 0 30px;
+    }
+    .navbarIconContainer {
+        flex-direction: column;
+        min-height: 100%;
+        padding: 30px 0;
+    }
+    .activeNavbarIconLight, .activeNavbarIconDark, .iconBG {
+        min-width: 45px !important;
+        min-height: 45px !important;
+    }
+}
+
+@media (min-width: 1200px) {
+    .activeNavbarIconLight, .activeNavbarIconDark, .iconBG {
+        min-width: 55px !important;
+        min-height: 55px !important;
+    }
+}
+
+.iconBG {
+    background-color: transparent;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+}
+
+.activeNavbarIconLight {
+    background-color: black;
+    border-radius: 50%;
+    min-width: 40px;
+    min-height: 40px;
+    text-align: center;
+    color: rgb(106, 186, 255);
+    text-shadow: 0px 0px 5px rgb(174, 217, 255);
+    box-shadow: 0px 0px 10px black;
+    transition: 0.3s;
+}
+
+.activeNavbarIconDark {
+    background-color: rgba(109, 156, 197, 0.842);
+    border-radius: 50%;
+    min-width: 40px;
+    min-height: 40px;
+    text-align: center;
+    text-shadow: 0px 0px 7px rgb(19, 81, 139);
+    box-shadow: 0px 0px 10px rgb(135, 215, 231);
+    transition: 0.3s;
+}
+
+.iconBG:hover {
+    transform: scale(1.1);
+    transition: 0.25s;
+    text-shadow: 0px 0px 10px grey;
+} 
+
+.activeNavbarIconLight:hover, .activeNavbarIconDark:hover {
+    transform: scale(1.1);
+} 
