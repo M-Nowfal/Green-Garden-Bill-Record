@@ -1,6 +1,7 @@
 //@ts-nocheck
 import express from "express";
 import cors from "cors";
+import setCorsHeaders from "./config/set-cors-headers.js";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import dbConnect from "./config/connection.js";
@@ -19,18 +20,12 @@ app.options("*", cors({
     origin: "https://housing-unit-bill-record.vercel.app",
     credentials: true
 }));
+
+app.use(setCorsHeaders);
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
-
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "https://housing-unit-bill-record.vercel.app");
-    res.header("Access-Control-Allow-Credentials", "true");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-    next();
-});
 
 dbConnect();
 
