@@ -41,7 +41,7 @@ export const OTPVerification = () => {
             }
             setIsOtpVerified(false);
             if (auth == "login") {
-                const response = await AxiosConfig().post("/user/login/vrify-otp", { OTP, userDetails });
+                const response = await AxiosConfig().post("/user/login/verify-otp", { OTP, userDetails });
                 if (response.data.verified) {
                     toast.success(response.data.message);
                     setIsOtpVerified(true);

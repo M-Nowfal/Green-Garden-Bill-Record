@@ -14,7 +14,7 @@ export const Buildings = ({ building }) => {
         try {
             const response = await AxiosConfig().get(`/building/${building}`);
             // toast.success(response.data.message);
-            const houses = response.data.buildingDetails.houses;
+            const houses = response.data.buildingDetails?.houses;
             navigate("/view-single-building", { state: { building, houses } });
         } catch (err) {
             const msg = err.response?.data?.error || err.response?.data?.message || "Something went wrong";

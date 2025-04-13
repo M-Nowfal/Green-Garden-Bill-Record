@@ -42,7 +42,7 @@ export const ViewSingleBuilding = () => {
                 nextBuilding = "J";
             }
             const response = await AxiosConfig().get(`/building/${nextBuilding}`);
-            const houses = response.data.buildingDetails.houses;
+            const houses = response.data.buildingDetails?.houses;
             navigate("/view-single-building", { state: { building: nextBuilding, houses } });
         } catch (err) {
             const msg = err.response?.data?.error || err.response?.data?.message || "Something went wrong";
@@ -58,7 +58,7 @@ export const ViewSingleBuilding = () => {
                 previousBuilding = "H";
             }
             const response = await AxiosConfig().get(`/building/${previousBuilding}`);
-            const houses = response.data.buildingDetails.houses;
+            const houses = response.data.buildingDetails?.houses;
             navigate("/view-single-building", { state: { building: previousBuilding, houses } });
         } catch (err) {
             const msg = err.response?.data?.error || err.response?.data?.message || "Something went wrong";
@@ -89,7 +89,7 @@ export const ViewSingleBuilding = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {houses.length > 0 && houses.map(house => (
+                                {houses?.length > 0 && houses?.map(house => (
                                     <HousesTable
                                         key={house.doorNo}
                                         house={house}
@@ -97,7 +97,7 @@ export const ViewSingleBuilding = () => {
                                 ))}
                             </tbody>
                         </table>) : (
-                            houses.length > 0 && houses.map(house => (
+                            houses?.length > 0 && houses?.map(house => (
                                 <HousesCard
                                     key={house.doorNo}
                                     house={house}

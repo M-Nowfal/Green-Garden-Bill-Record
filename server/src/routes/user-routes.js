@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.get("/get-user", getUser);
 router.post("/login", userLogin);
-router.post("/login/vrify-otp", verifyOtpForUserLogin);
+router.post("/login/verify-otp", verifyOtpForUserLogin); 
 router.post("/logout", userLogOut);
 router.post("/logout/verify-otp", verifyOtpForUserLogOut);
 router.post("/forgot-password", changePassword);
