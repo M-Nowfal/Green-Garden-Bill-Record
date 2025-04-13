@@ -27,7 +27,7 @@ export const Home = () => {
                 const msg = err.response?.data?.error || err.response?.data?.message || "Something went wrong";
                 toast.error(msg);
                 console.log(err.message);
-                navigate("/login");
+                navigate("/");
             }
         }
         getUserToken();
