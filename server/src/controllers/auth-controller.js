@@ -40,7 +40,6 @@ export const verifyRegistrationOtp = async (req, res, next) => {
 
         // Verify OTP
         if (verifyOtp(OTP, userDetails.email)) {
-            console.log("OTP verified successfully");
             const hashedPwd = await bcryptjs.hash(userDetails.pwd, 10);
 
             const user = {
@@ -84,8 +83,8 @@ export const verifyRegistrationOtp = async (req, res, next) => {
             res.cookie("token", token, {
                 httpOnly: true,
                 secure: true,
-                sameSite: "lax",
-                maxAge: 24 * 60 * 60 * 30000
+                sameSite: "None",
+                maxAge: 24 * 60 * 60 * 1000 * 30
             }).status(200).json({ message: "Registered Successfully", verified: true });
 
         } else {
