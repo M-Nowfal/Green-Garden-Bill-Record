@@ -8,6 +8,13 @@ export const AdminPage = () => {
     const { theme } = useContext(AppContext);
     const navigate = useNavigate();
 
+    const options = [
+        { title: "Register new User", to: "/register" },
+        { title: "Edit existing User", to: "/edit-user" },
+        { title: "Remove User", to: "/remove-user" },
+        { title: "Record Water Bill Payment", to: "/recordwaterbill" },
+    ];
+
     return (
         <div className={`vh-100 ${theme ? "light-theme" : "dark-theme"}`}>
             <div className={`cursor-pointer`} onClick={() => navigate("/admin")}>
@@ -18,22 +25,18 @@ export const AdminPage = () => {
                     <div>
                         <h1 className={`${theme ? "" : "text-success"} text-center`} >Admin Page</h1>
                         <hr className={theme ? "" : "text-white"} />
-                        <div className="position-relative mt-4 ms-5">
-                            <h4
-                                className={` cursor-pointer ${theme ? "" : "text-alice"}`}
-                                onClick={() => navigate("/register", { state: { admin: true } })} >
-                                    Register new User
-                            </h4>
-                        </div>
-                        <hr className={theme ? "" : "text-white"} />
-                        <div className="position-relative ms-5">
-                            <h4
-                                className={` cursor-pointer ${theme ? "" : "text-alice"}`}
-                                onClick={() => navigate("/recordwaterbill", { state: { admin: true } })} >
-                                    Record Water Bill Payment
-                            </h4>
-                        </div>
-                        <hr className={theme ? "" : "text-white"} />
+                        {options.map(option => (
+                            <div key={option.title}>
+                                <div className="position-relative mt-4 ms-5">
+                                    <h4
+                                        className={` cursor-pointer ${theme ? "" : "text-alice"}`}
+                                        onClick={() => navigate(option.to, { state: { admin: true } })} >
+                                        {option.title}
+                                    </h4>
+                                </div>
+                                <hr className={theme ? "" : "text-white"} />
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>

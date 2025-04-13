@@ -15,7 +15,13 @@ export const getBuilding = async (req, res, next) => {
         // }
         // await buildingModel.create({ name: building, houses: details });
         // res.json({ message: `Block ${building} Success` });
-        const buildingDetails = await buildingModel.findOne({ name: building }).populate("houses.owner");
+        const buildingDetails = await buildingModel.findOne({ name: building }).populate({
+            path: "houses",
+            populate: [
+                { path: "owner", model: "User" },
+                { path: "waterBills", model: "WaterBill" }
+            ]
+        });
         res.status(200).json({ message: "Building Details Fetched Successfully", buildingDetails });
     } catch (err) {
         next(err);
@@ -24,7 +30,13 @@ export const getBuilding = async (req, res, next) => {
 
 export const getAllBuildings = async (req, res, next) => {
     try {
-        const buildings = await buildingModel.find({}).populate("houses.owner");
+        const buildings = await buildingModel.find({}).populate({
+            path: "houses",
+            populate: [
+                { path: "owner", model: "User" },
+                { path: "waterBills", model: "WaterBill" }
+            ]
+        });
         res.status(200).json({ message: "Buildings fetched successfully", buildings });
     } catch (err) {
         next(err);

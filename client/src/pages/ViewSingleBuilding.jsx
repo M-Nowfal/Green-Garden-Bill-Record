@@ -97,7 +97,8 @@ export const ViewSingleBuilding = () => {
                                     <th>Name</th>
                                     <th>Phone</th>
                                     <th>E-mail</th>
-                                    <th>Last Paid</th>
+                                    <th>Last Water Bill</th>
+                                    <th>Paid Date</th>
                                 </tr>
                             </thead>
                             <tbody>

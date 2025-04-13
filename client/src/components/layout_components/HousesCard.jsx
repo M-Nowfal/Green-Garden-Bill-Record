@@ -5,6 +5,7 @@ import { AppContext } from '../../App';
 export const HousesCard = ({ house }) => {
 
     const { theme } = useContext(AppContext);
+    const lastBill = house.waterBills[house.waterBills.length - 1];
 
     return (
         <div className="col-12 col-sm-6">
@@ -41,9 +42,15 @@ export const HousesCard = ({ house }) => {
                             </tr>
                             <tr><td><hr className="p-1 m-1" /></td></tr>
                             <tr>
-                                <th>Last Bill</th>
+                                <th>Last Water Bill</th>
                                 <th className="ps-3">:</th>
-                                <td className="ps-2">{house.lastPaidOn || "JN/A"}</td>
+                                <td className="ps-2">{`${lastBill?.month || "N/A" }-${lastBill?.year || "N/A"}`}</td>
+                            </tr>
+                            <tr><td><hr className="p-1 m-1" /></td></tr>
+                            <tr>
+                                <th>Payment Date</th>
+                                <th className="ps-3">:</th>
+                                <td className="ps-2">{lastBill?.paymentDate.slice(0, 10) || "N/A"}</td>
                             </tr>
                         </tbody>
                     </table>

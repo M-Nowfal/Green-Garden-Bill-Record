@@ -81,7 +81,8 @@ export const Search = () => {
                                         <th>Name</th>
                                         <th>Phone</th>
                                         <th>E-mail</th>
-                                        <th>Last Paid</th>
+                                        <th>Last Water Bill</th>
+                                        <th>Payment Date</th>
                                     </tr>
                                 </thead>
                                 <tbody>
