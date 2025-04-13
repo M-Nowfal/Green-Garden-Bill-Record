@@ -4,7 +4,7 @@ import app from "./src/app.js";
 
 const server = express();
 
-server.use(app);
+server.use("/", app);
 
 const PORT = process.env.PORT || 3000;
 
