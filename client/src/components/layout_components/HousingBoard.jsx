@@ -9,6 +9,10 @@ export const HousingBoard = () => {
     const buildings = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R'];
     const [loading, setLoading] = useState(true);
 
+    if(!loading) {
+        return <Loader />
+    }
+
     return (
         <>
             <div className={`position-fixed text-center py-2 w-100 z-1 ${theme ? "bg-alice" : "bg-black"}`}>
@@ -16,7 +20,6 @@ export const HousingBoard = () => {
             </div>
             <div className="container pt-5 pt-sm-0">
                 <div className="row">
-                    {!loading && <Loader />}
                     <div className="col-11 ms-3">
                         <div className="d-flex justify-content-center align-items-center vh-100">
                             <div className="container">
