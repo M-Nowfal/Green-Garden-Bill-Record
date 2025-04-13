@@ -15,7 +15,7 @@ export const User = () => {
     useEffect(() => {
         const getUser = async () => {
             try {
-                const response = await AxiosConfig().get("/user/get-user");
+                const response = await AxiosConfig().post("/user/get-user", { user: localStorage.getItem("userToken") });
                 setUser(response.data.user);
             } catch (err) {
                 const msg = err.response?.data?.error || err.response?.data?.message || "Something went wrong";
@@ -26,7 +26,7 @@ export const User = () => {
         getUser();
     }, []);
 
-    if(!user) {
+    if (!user) {
         return (
             <Loader />
         );

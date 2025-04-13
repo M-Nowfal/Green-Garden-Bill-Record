@@ -45,6 +45,7 @@ export const OTPVerification = () => {
                 if (response.data.verified) {
                     toast.success(response.data.message);
                     setIsOtpVerified(true);
+                    localStorage.setItem("userToken", response.data?.user);
                     navigate("/");
                 }
             } else if (auth == "register") {
@@ -52,6 +53,7 @@ export const OTPVerification = () => {
                 if (response.data.verified) {
                     toast.success(response.data.message);
                     setIsOtpVerified(true);
+                    localStorage.setItem("userToken", response.data?.user);
                     navigate("/");
                 }
             } else if (auth == "logout") {

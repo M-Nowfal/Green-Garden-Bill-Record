@@ -7,6 +7,7 @@ import { HousesTable } from '../components/layout_components/HousesTable';
 import { toast } from 'sonner';
 import { AxiosConfig } from '../components/axios_config/AxiosConfig';
 import { HousesCard } from '../components/layout_components/HousesCard';
+import { Loader } from '../components/ui_components/Loader';
 
 export const ViewSingleBuilding = () => {
 
@@ -14,6 +15,7 @@ export const ViewSingleBuilding = () => {
     const { building, houses } = useLocation().state || {};
     const navigate = useNavigate();
     const width = useScreenWidth();
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         return () => window.scrollTo(0, 0);
@@ -41,13 +43,16 @@ export const ViewSingleBuilding = () => {
             if (nextBuilding == "I") {
                 nextBuilding = "J";
             }
+            setLoading(false);
             const response = await AxiosConfig().get(`/building/${nextBuilding}`);
             const houses = response.data.buildingDetails?.houses;
+            setLoading(true);
             navigate("/view-single-building", { state: { building: nextBuilding, houses } });
         } catch (err) {
             const msg = err.response?.data?.error || err.response?.data?.message || "Something went wrong";
             toast.error(msg);
             console.log(err.message);
+            setLoading(true);
         }
     };
 
@@ -57,15 +62,22 @@ export const ViewSingleBuilding = () => {
             if (previousBuilding == "I") {
                 previousBuilding = "H";
             }
+            setLoading(false);
             const response = await AxiosConfig().get(`/building/${previousBuilding}`);
             const houses = response.data.buildingDetails?.houses;
+            setLoading(true);
             navigate("/view-single-building", { state: { building: previousBuilding, houses } });
         } catch (err) {
             const msg = err.response?.data?.error || err.response?.data?.message || "Something went wrong";
             toast.error(msg);
             console.log(err.message);
+            setLoading(true);
         }
     };
+
+    if(!loading) {
+        return <Loader />
+    }
 
     return (
         <>

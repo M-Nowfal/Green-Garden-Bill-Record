@@ -14,11 +14,12 @@ export const Home = () => {
     const { theme, currentActiveIcon, setCurrentActiveIcon } = useContext(AppContext);
     const navigate = useNavigate();
     const [page, setPage] = useState(null);
+    const storedUser = localStorage.getItem("userToken");
 
     useEffect(() => {
         const getUserToken = async () => {
             try {
-                const response = await AxiosConfig().get(`/auth/validate`, { withCredentials: true });
+                const response = await AxiosConfig().post(`/auth/validate`, { user: storedUser }, { withCredentials: true });
                 if (!response.data.verified) {
                     toast.error("Your Session has expired Login again");
                     navigate("/login");
@@ -27,7 +28,7 @@ export const Home = () => {
                 const msg = err.response?.data?.error || err.response?.data?.message || "Something went wrong";
                 toast.error(msg);
                 console.log(err.message);
-                navigate("/");
+                navigate("/login");
             }
         }
         getUserToken();

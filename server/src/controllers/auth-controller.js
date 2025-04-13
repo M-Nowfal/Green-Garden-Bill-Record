@@ -8,7 +8,7 @@ import buildingModel from "../models/building-model.js";
 
 export const getToken = async (req, res, next) => {
     try {
-        const token = req.cookies.token;
+        const token = req.cookies?.token || req.body?.user;
         if (!token)
             return res.status(401).json({ message: "Unauthorized", verified: false });
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
@@ -22,7 +22,6 @@ export const getToken = async (req, res, next) => {
 export const registerNewUser = async (req, res, next) => {
     try {
         const { email } = req.body;
-        // Send OTP
         sendOtp(email).then(() => {
             res.status(200).json({ message: "OTP Sent Successfully", otpSent: true });
         }).catch(err => {
@@ -37,8 +36,6 @@ export const registerNewUser = async (req, res, next) => {
 export const verifyRegistrationOtp = async (req, res, next) => {
     try {
         const { OTP, userDetails } = req.body;
-
-        // Verify OTP
         if (verifyOtp(OTP, userDetails.email)) {
             const hashedPwd = await bcryptjs.hash(userDetails.pwd, 10);
 
@@ -85,7 +82,7 @@ export const verifyRegistrationOtp = async (req, res, next) => {
                 secure: true,
                 sameSite: "None",
                 maxAge: 24 * 60 * 60 * 1000 * 30
-            }).status(200).json({ message: "Registered Successfully", verified: true });
+            }).status(200).json({ message: "Registered Successfully", verified: true, user: token });
 
         } else {
             return res.status(400).json({ error: "OTP verification Failed" });

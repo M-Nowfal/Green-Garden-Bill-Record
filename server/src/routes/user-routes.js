@@ -7,7 +7,7 @@ import {
 
 const router = express.Router();
 
-router.get("/get-user", getUser);
+router.post("/get-user", getUser);
 router.post("/login", userLogin);
 router.post("/login/verify-otp", verifyOtpForUserLogin); 
 router.post("/logout", userLogOut);

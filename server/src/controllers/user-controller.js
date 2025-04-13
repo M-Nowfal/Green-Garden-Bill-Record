@@ -36,7 +36,7 @@ export const verifyOtpForUserLogin = async (req, res, next) => {
                 secure: true,
                 sameSite: "lax",
                 maxAge: 24 * 60 * 60 * 30000
-            }).status(200).json({ message: "Logged In Successfully", verified: true });
+            }).status(200).json({ message: "Logged In Successfully", verified: true, user: token });
         } else {
             return res.status(500).json({ error: "OTP verification Failed" });
         }
@@ -127,7 +127,7 @@ export const changeUserPassword = async (req, res, next) => {
 
 export const getUser = async (req, res, next) => {
     try {
-        const token = req.cookies.token;
+        const token = req.cookies?.token || req.body?.user;
         const user = jwt.decode(token);
         res.status(200).json({ message: "Authorized", user });
     } catch (err) {

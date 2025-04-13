@@ -1,11 +1,13 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Buildings } from './Buildings';
 import { AppContext } from '../../App';
+import { Loader } from '../ui_components/Loader';
 
 export const HousingBoard = () => {
 
     const { theme } = useContext(AppContext);
     const buildings = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R'];
+    const [loading, setLoading] = useState(true);
 
     return (
         <>
@@ -14,11 +16,12 @@ export const HousingBoard = () => {
             </div>
             <div className="container pt-5 pt-sm-0">
                 <div className="row">
+                    {!loading && <Loader />}
                     <div className="col-11 ms-3">
                         <div className="d-flex justify-content-center align-items-center vh-100">
                             <div className="container">
                                 <div className="row mb-5">
-                                    {buildings.map(building => <Buildings key={building} building={building} />)}
+                                    {buildings.map(building => <Buildings key={building} building={building} setLoading={setLoading} />)}
                                 </div>
                             </div>
                         </div>
