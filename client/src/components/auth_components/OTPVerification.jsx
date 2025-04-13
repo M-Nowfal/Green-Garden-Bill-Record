@@ -61,6 +61,7 @@ export const OTPVerification = () => {
                 if (response.data.verified) {
                     toast.success(response.data.message);
                     setIsOtpVerified(true);
+                    localStorage.removeItem("userToken");
                     navigate("/login");
                 }
             } else if (auth == "changepwd") {
