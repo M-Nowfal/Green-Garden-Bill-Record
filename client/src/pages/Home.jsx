@@ -18,7 +18,7 @@ export const Home = () => {
     useEffect(() => {
         const getUserToken = async () => {
             try {
-                const response = await AxiosConfig().get(`/auth/validate`);
+                const response = await AxiosConfig().get(`/auth/validate`, { withCredentials: true });
                 if (!response.data.verified) {
                     toast.error("Your Session has expired Login again");
                     navigate("/login");

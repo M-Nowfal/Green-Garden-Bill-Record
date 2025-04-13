@@ -37,10 +37,19 @@ export const registerNewUser = async (req, res, next) => {
 export const verifyRegistrationOtp = async (req, res, next) => {
     try {
         const { OTP, userDetails } = req.body;
+
         // Verify OTP
         if (verifyOtp(OTP, userDetails.email)) {
+            console.log("OTP verified successfully");
             const hashedPwd = await bcryptjs.hash(userDetails.pwd, 10);
-            const user = { doorNo: userDetails.doorNo, fName: userDetails.fName, phoneNo: userDetails.phoneNo, email: userDetails.email };
+
+            const user = {
+                doorNo: userDetails.doorNo,
+                fName: userDetails.fName,
+                phoneNo: userDetails.phoneNo,
+                email: userDetails.email
+            };
+
             const buildingId = await buildingModel.findOne({ name: user.doorNo.charAt(0).toUpperCase() });
 
             if (!buildingId) {
@@ -78,13 +87,15 @@ export const verifyRegistrationOtp = async (req, res, next) => {
                 sameSite: "lax",
                 maxAge: 24 * 60 * 60 * 30000
             }).status(200).json({ message: "Registered Successfully", verified: true });
+
         } else {
-            return res.status(500).json({ error: "OTP verification Failed" });
+            return res.status(400).json({ error: "OTP verification Failed" });
         }
     } catch (err) {
+        console.error("Error in verifyRegistrationOtp:", err);
         next(err);
     }
-}
+};
 
 export const validate = async (req, res, next) => {
     try {

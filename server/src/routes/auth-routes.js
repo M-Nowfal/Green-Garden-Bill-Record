@@ -4,7 +4,7 @@ import { validate, getToken, registerNewUser, verifyRegistrationOtp } from "../c
 const router = express.Router();
 
 router.get("/validate", getToken, validate);
-router.post("/register", registerNewUser);
 router.post("/register/verify-otp", verifyRegistrationOtp);
+router.post("/register", registerNewUser);
 
 export default router;
