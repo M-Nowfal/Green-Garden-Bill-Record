@@ -11,11 +11,11 @@ import buildingRouter from "./routes/building-routes.js";
 
 const app = express();
 
-//CORS 
 app.use(cors({
-    origin: process.env.CLIENT_URL, 
-    credentials: true, 
+    origin: process.env.CLIENT_URL,
+    credentials: true,
     methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type", "Authorization"],
     optionsSuccessStatus: 200
 }));
 
