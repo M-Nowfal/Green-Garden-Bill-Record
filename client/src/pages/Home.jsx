@@ -27,6 +27,8 @@ export const Home = () => {
                     toast.error("Your Session has expired Login again");
                     setLoading(true);
                     navigate("/login");
+                } else {
+                    setLoading(true);
                 }
             } catch (err) {
                 const msg = err.response?.data?.error || err.response?.data?.message || "Something went wrong";

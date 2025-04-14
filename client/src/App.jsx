@@ -18,6 +18,9 @@ import { NewPassword } from "./components/auth_components/NewPassword";
 import { Admin } from "./components/admin_components/Admin";
 import { AdminPage } from "./pages/AdminPage";
 import { WaterBillForm } from "./pages/WaterBillForm";
+import { WaterBillHistory } from "./pages/WaterBillHistory";
+import { EditUser } from "./components/admin_components/EditUser";
+import { RemoveUser } from "./components/admin_components/RemoveUser";
 
 export const AppContext = createContext();
 
@@ -35,6 +38,9 @@ export const App = () => {
 		{ path: "/admin", element: <Admin /> },
 		{ path: "/adminpage", element: <AdminPage /> },
 		{ path: "/recordwaterbill", element: <WaterBillForm /> },
+		{ path: "/history/:doorNo", element: <WaterBillHistory /> },
+		{ path: "/edit-user", element: <EditUser /> },
+		{ path: "/remove-user", element: <RemoveUser /> },
 		{ path: "*", element: <PageNotFound /> }
 	]);
 
@@ -52,7 +58,7 @@ export const App = () => {
 					richColors
 					position="top-center"
 					swipeDirections={["left", "right"]}
-					duration={3500}
+					duration={5000}
 				/>
 				<RouterProvider router={router} />
 			</AppContext.Provider>

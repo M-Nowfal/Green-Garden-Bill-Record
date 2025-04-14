@@ -1,10 +1,12 @@
 import React, { useContext } from 'react'
 import styles from "./HouseCard.module.css";
 import { AppContext } from '../../App';
+import { useNavigate } from 'react-router-dom';
 
 export const HousesCard = ({ house }) => {
 
     const { theme } = useContext(AppContext);
+    const navigate = useNavigate();
     const lastBill = house.waterBills[house.waterBills.length - 1];
 
     return (
@@ -51,6 +53,12 @@ export const HousesCard = ({ house }) => {
                                 <th>Payment Date</th>
                                 <th className="ps-3">:</th>
                                 <td className="ps-2">{lastBill?.paymentDate.slice(0, 10) || "N/A"}</td>
+                            </tr>
+                            <tr><td><hr className="p-1 m-1" /></td></tr>
+                            <tr>
+                                <th>History</th>
+                                <th className="ps-3">:</th>
+                                <td className="ps-2"><button className={`btn btn-outline-primary`} onClick={() => navigate(`/history/${house.doorNo}`)}>View History</button></td>
                             </tr>
                         </tbody>
                     </table>

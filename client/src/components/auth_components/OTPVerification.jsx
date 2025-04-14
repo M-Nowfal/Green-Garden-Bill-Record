@@ -71,6 +71,23 @@ export const OTPVerification = () => {
                     setIsOtpVerified(true);
                     navigate("/newpwd", { state: { email: userDetails.email } });
                 }
+            } else if (auth == "edit-user") {
+                const response = await AxiosConfig().post("/admin/edit-user/verify-otp", { OTP, userDetails });
+                if (response.data.verified) {
+                    toast.success(response.data.message);
+                    setIsOtpVerified(true);
+                    navigate("/");
+                }
+            } else if (auth == "remove-user") {
+                const response = await AxiosConfig().post("/admin/remove-user/verify-otp", { OTP, userDetails, user: localStorage.getItem("userToken") });
+                if (response.data.verified) {
+                    toast.success(response.data.message);
+                    if (response.data.user) {
+                        localStorage.removeItem("userToken");
+                    }
+                    setIsOtpVerified(true);
+                    navigate("/");
+                }
             } else {
                 toast.error("Route is not clear");
                 setIsOtpVerified(true);
@@ -169,6 +186,7 @@ export const OTPVerification = () => {
                                 <div className="text-center">
                                     <p className={`${!theme && "text-alice"} px-4`}>
                                         Enter the verification code we just sent to your email address.
+                                        If you don't see the OTP in your inbox, be sure to check your Spam or Junk folder
                                     </p>
                                     <p className={!theme ? "text-alice" : ""}>{email || "example@email.com"}</p>
                                 </div>

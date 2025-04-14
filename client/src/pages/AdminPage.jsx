@@ -1,12 +1,14 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { AppContext } from '../App';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Theme } from '../components/ui_components/Theme';
+import { toast } from 'sonner';
 
 export const AdminPage = () => {
 
     const { theme } = useContext(AppContext);
     const navigate = useNavigate();
+    const { admin } = useLocation().state || {};
 
     const options = [
         { title: "Register new User", to: "/register" },
@@ -14,6 +16,13 @@ export const AdminPage = () => {
         { title: "Remove User", to: "/remove-user" },
         { title: "Record Water Bill Payment", to: "/recordwaterbill" },
     ];
+
+    useEffect(() => {
+        if(!admin) {
+            toast.error("Only Admin can access this page");
+            navigate("/admin");
+        }
+    }, []);
 
     return (
         <div className={`vh-100 ${theme ? "light-theme" : "dark-theme"}`}>

@@ -99,6 +99,7 @@ export const ViewSingleBuilding = () => {
                                     <th>E-mail</th>
                                     <th>Last Water Bill</th>
                                     <th>Paid Date</th>
+                                    <th>History</th>
                                 </tr>
                             </thead>
                             <tbody>

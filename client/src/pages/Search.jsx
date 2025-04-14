@@ -56,6 +56,9 @@ export const Search = () => {
     function handleSearch(e) {
 
         let input = e.target.value.trim().toUpperCase();
+        if (input.length === 0) {
+            setFilteredBuilding(buildings);
+        };
         input = input.replace("-", "");
         input = input.replace(" ", "");
         if (input.length == 1) {
@@ -63,7 +66,7 @@ export const Search = () => {
                 building.name == input[0]
             )));
             return;
-        } else if (input.length >= 2) {
+        } else {
             let block, houses, home;
             block = buildings.filter(b => (
                 b.name == input[0]
@@ -123,6 +126,7 @@ export const Search = () => {
                                         <th>E-mail</th>
                                         <th>Last Water Bill</th>
                                         <th>Payment Date</th>
+                                        <th>History</th>
                                     </tr>
                                 </thead>
                                 <tbody>

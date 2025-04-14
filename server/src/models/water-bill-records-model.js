@@ -27,6 +27,6 @@ const waterBillSchema = new mongoose.Schema({
     }
 });
 
-const waterBuildRecordModel = mongoose.model("WaterBill", waterBillSchema);
+const waterBilldRecordModel = mongoose.model("WaterBill", waterBillSchema);
 
-export default waterBuildRecordModel;
+export default waterBilldRecordModel;

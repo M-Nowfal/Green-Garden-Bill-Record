@@ -87,7 +87,7 @@ export const verifyRegistrationOtp = async (req, res, next) => {
             }).status(200).json({ message: "Registered Successfully", verified: true, user: token });
 
         } else {
-            return res.status(400).json({ error: "OTP verification Failed" });
+            return res.status(401).json({ error: "OTP verification Failed" });
         }
     } catch (err) {
         console.error("Error in verifyRegistrationOtp:", err);

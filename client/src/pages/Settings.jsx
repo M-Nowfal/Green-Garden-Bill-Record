@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Toggler } from "../components/ui_components/Toggler"
 import { AppContext } from '../App';
 import styles from "./Settings.module.css";
@@ -11,6 +11,7 @@ export const Settings = () => {
     const navigate = useNavigate();
     const [settings, setSettings] = useState({ Vibration: false, Notification: false });
     const options = ["Vibration", "Notification", "Change Password", "Login", "Logout", "Admin"];
+    const storedUser = localStorage.getItem("userToken");
 
     function handleOnClick(option) {
         if (option == options[2]) {
@@ -23,6 +24,13 @@ export const Settings = () => {
             navigate("/admin");
         }
     }
+
+    useEffect(() => {
+        if(!storedUser) {
+            toast.error("Login Again");
+            navigate("/login");
+        }
+    }, []);
 
     return (
         <div className="container-fluid p-5">
