@@ -61,7 +61,7 @@ export const WaterBillHistory = () => {
                                                 <td className={theme ? "" : "text-alice"}>
                                                     {record ? record.paymentDate?.slice(0, 10) : "NILL"}
                                                 </td>
-                                                <td>{record ? "✔" : "❌"}</td>
+                                                <td class name={record ? "text-success" : ""}>{record ? "✔" : "❌"}</td>
                                             </tr>
                                         })}
                                     </tbody>
