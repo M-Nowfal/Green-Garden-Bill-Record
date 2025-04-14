@@ -35,7 +35,7 @@ export const WaterBillForm = () => {
             if (response.data.paid) {
                 toast.success(response.data.message);
                 setLoading(true);
-                // navigate("/");
+                navigate("/");
             }
         } catch (err) {
             const msg = err.response?.data?.error || err.response?.data?.message || "Something went wrong";

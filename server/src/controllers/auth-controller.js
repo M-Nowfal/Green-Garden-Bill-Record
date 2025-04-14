@@ -9,11 +9,13 @@ import buildingModel from "../models/building-model.js";
 export const getToken = async (req, res, next) => {
     try {
         const token = req.cookies?.token || req.body?.user;
-        if (!token)
+        if (!token) {
             return res.status(401).json({ message: "Unauthorized", verified: false });
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        req.user = decoded;
-        next();
+        } else {
+            const decoded = jwt.verify(token, process.env.JWT_SECRET);
+            req.user = decoded;
+            next();
+        }
     } catch (err) {
         return res.status(403).json({ message: "Invalid or expired token", verified: false });
     }
@@ -95,7 +97,7 @@ export const verifyRegistrationOtp = async (req, res, next) => {
 
 export const validate = async (req, res, next) => {
     try {
-        res.status(200).json({ message: "Validation Failed", verified: true });
+        res.status(200).json({ message: "Validation Success", verified: true });
     } catch (err) {
         next(err);
     }

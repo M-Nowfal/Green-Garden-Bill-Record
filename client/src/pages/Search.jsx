@@ -11,6 +11,7 @@ export const Search = () => {
 
     const { theme, setCurrentActiveIcon } = useContext(AppContext);
     const [buildings, setBuildings] = useState([]);
+    const [filteredBuilding, setFilteredBuilding] = useState([]);
     const [isBuildingFetched, setIsBuildingFetched] = useState(true);
     const [top, setTop] = useState(false);
 
@@ -20,6 +21,7 @@ export const Search = () => {
             try {
                 const response = await AxiosConfig().get("/building/get-all-buildings");
                 setBuildings(response.data.buildings);
+                setFilteredBuilding(response.data.buildings);
                 setIsBuildingFetched(true);
             } catch (err) {
                 const msg = err.response?.data?.error || err.response?.data?.message || "Something went wrong";
@@ -49,6 +51,34 @@ export const Search = () => {
         }, []);
 
         return screenWidth;
+    };
+
+    function handleSearch(e) {
+
+        let input = e.target.value.trim().toUpperCase();
+        input = input.replace("-", "");
+        input = input.replace(" ", "");
+        if (input.length == 1) {
+            setFilteredBuilding(buildings.filter(building => (
+                building.name == input[0]
+            )));
+            return;
+        } else if (input.length >= 2) {
+            let block, houses, home;
+            block = buildings.filter(b => (
+                b.name == input[0]
+            ));
+            houses = block[0].houses;
+            home = houses.filter(h => (
+                h.doorNo == `${input[0]}-${input.slice(1)}`
+            ));
+            const fBuilding = [{
+                name: input[0],
+                houses: home,
+            }];
+            setFilteredBuilding(fBuilding);
+            return;
+        }
     }
 
     const width = useScreenWidth();
@@ -64,10 +94,20 @@ export const Search = () => {
             <div className={`cursor-pointer`}>
                 <i className={`${theme ? "" : "text-alice"} fa-solid fa-arrow-left fs-5 ps-3 pt-4`} onClick={() => setCurrentActiveIcon("home")} />
             </div>
+            <div className="text-center">
+                <input
+                    type="search"
+                    className="w-75 rounded p-2 fs-4"
+                    name="search"
+                    onChange={handleSearch}
+                    maxLength={4}
+                    placeholder="Enter the Door No: G-20"
+                />
+            </div>
             <div className={`cursor-pointer position-fixed`} style={{ right: "20px", bottom: "80px" }}>
                 <i className={`${theme ? "" : "text-alice"} fs-4 fa-solid fa-arrow-up`} onClick={() => setTop(!top)} />
             </div>
-            {buildings.map((building, i) => (
+            {filteredBuilding.map((building, i) => (
                 <div key={i} className="me-md-5 pe-md-5">
                     <div className="d-flex justify-content-center py-3">
                         <h1 className={`${theme ? "text-black" : "text-alice"} fw-bold ${styles.blockName}`}>{building.name}-Block</h1>
@@ -108,43 +148,3 @@ export const Search = () => {
         </div>
     );
 }
-
-/* 
-    <div className="d-flex justify-content-center py-3">
-                            <h1 className={`${theme ? "text-black" : "text-alice"} fw-bold ${styles.blockName}`}>{building.name}-Block</h1>
-                        </div>
-                        <div className="mx-lg-5 pb-5">
-                            <div className="row mx-3 pb-5">
-                                {width > 700 ? (<table className="text-center table-bordered">
-                                    <thead>
-                                        <tr className={`${theme ? styles.tableHeadLight : styles.tableHeadDark}`}>
-                                            <th className="py-3">Door No</th>
-                                            <th>Name</th>
-                                            <th>Phone</th>
-                                            <th>E-mail</th>
-                                            <th>Last Paid</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {building.houses.length > 0 && houses.map(house => (
-                                            <HousesTable
-                                                key={house.doorNo}
-                                                house={house}
-                                            />
-                                        ))}
-                                    </tbody>
-                                </table>) : (
-                                    building.houses.length > 0 && houses.map(house => (
-                                        <HousesCard
-                                            key={house.doorNo}
-                                            house={house}
-                                        />
-                                    ))
-                                )}
-                            </div>
-                            <div className="text-center">
-                                {building.name != "A" && <button className={`${theme ? styles.tableHeadLight : styles.tableHeadDark} ${styles.btn}`} onClick={handlePreviousPage} >Previous</button>}
-                                {building.name != "R" && <button className={`${theme ? styles.tableHeadLight : styles.tableHeadDark} ${styles.btn}`} onClick={handleNextPage} >Next</button>}
-                            </div>
-                        </div>
-*/

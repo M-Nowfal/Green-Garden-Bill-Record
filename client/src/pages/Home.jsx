@@ -8,6 +8,7 @@ import { HousingBoard } from '../components/layout_components/HousingBoard';
 import { Search } from "./Search";
 import { Settings } from "./Settings";
 import { User } from './User';
+import { Loader } from '../components/ui_components/Loader';
 
 export const Home = () => {
 
@@ -15,23 +16,27 @@ export const Home = () => {
     const navigate = useNavigate();
     const [page, setPage] = useState(null);
     const storedUser = localStorage.getItem("userToken");
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const getUserToken = async () => {
             try {
+                setLoading(false);
                 const response = await AxiosConfig().post(`/auth/validate`, { user: storedUser }, { withCredentials: true });
                 if (!response.data.verified) {
                     toast.error("Your Session has expired Login again");
+                    setLoading(true);
                     navigate("/login");
                 }
             } catch (err) {
                 const msg = err.response?.data?.error || err.response?.data?.message || "Something went wrong";
                 toast.error(msg);
                 console.log(err.message);
+                setLoading(true);
                 navigate("/login");
             }
         }
-        getUserToken();
+        !storedUser && getUserToken();
     }, []);
 
     useEffect(() => {
@@ -45,6 +50,10 @@ export const Home = () => {
             setPage(<User />);
         }
     }, [currentActiveIcon]);
+
+    if(!loading) {
+        return <Loader />
+    }
 
     return (
         <div className={`${theme ? "light-theme" : "dark-theme"} min-vh-100`}>
