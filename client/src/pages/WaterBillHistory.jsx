@@ -42,7 +42,7 @@ export const WaterBillHistory = () => {
                 <div className="row">
                     {!loading && <Loader />}
                     <div className="text-center pt-5">
-                        {years.map(year => (
+                        {loading && years.map(year => (
                             <div key={year}>
                                 <h1 className={`${theme ? "" : "text-alice"} mt-4`}>Payment Details of <span className={theme ? "text-danger" : "text-warning"}>{doorNo}</span> for the year {year}</h1>
                                 <table className={`text-center table-bordered mb-5 pb-5 table-transparent w-100`} >
