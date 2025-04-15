@@ -45,10 +45,11 @@ export const App = () => {
 	]);
 
 	const [theme, setTheme] = useState(false);
-		const [currentActiveIcon, setCurrentActiveIcon] = useState("home");
+	const [currentActiveIcon, setCurrentActiveIcon] = useState("home");
+	const [firstTime, setFirstTime] = useState(true);
 
 	const contextValues = {
-		theme, setTheme, currentActiveIcon, setCurrentActiveIcon
+		theme, setTheme, currentActiveIcon, setCurrentActiveIcon, firstTime, setFirstTime
 	}
 
 	return (

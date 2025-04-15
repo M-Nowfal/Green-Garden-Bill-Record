@@ -58,6 +58,7 @@ export const Search = () => {
         let input = e.target.value.trim().toUpperCase();
         if (input.length === 0) {
             setFilteredBuilding(buildings);
+            return;
         };
         input = input.replace("-", "");
         input = input.replace(" ", "");
@@ -71,8 +72,8 @@ export const Search = () => {
             block = buildings.filter(b => (
                 b.name == input[0]
             ));
-            houses = block[0].houses;
-            home = houses.filter(h => (
+            houses = block[0]?.houses;
+            home = houses?.filter(h => (
                 h.doorNo == `${input[0]}-${input.slice(1)}`
             ));
             const fBuilding = [{
@@ -130,7 +131,7 @@ export const Search = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {building.houses.length > 0 && building.houses.map(house => (
+                                    {building.houses?.length > 0 && building.houses?.map(house => (
                                         <HousesTable
                                             key={house.doorNo}
                                             house={house}
@@ -138,7 +139,7 @@ export const Search = () => {
                                     ))}
                                 </tbody>
                             </table>) : (
-                                building.houses.length > 0 && building.houses.map(house => (
+                                building.houses?.length > 0 && building.houses?.map(house => (
                                     <HousesCard
                                         key={house.doorNo}
                                         house={house}

@@ -12,7 +12,7 @@ import { Loader } from '../components/ui_components/Loader';
 
 export const Home = () => {
 
-    const { theme, currentActiveIcon, setCurrentActiveIcon } = useContext(AppContext);
+    const { theme, currentActiveIcon, setCurrentActiveIcon, firstTime } = useContext(AppContext);
     const navigate = useNavigate();
     const [page, setPage] = useState(null);
     const storedUser = localStorage.getItem("userToken");
@@ -25,20 +25,18 @@ export const Home = () => {
                 const response = await AxiosConfig().post(`/auth/validate`, { user: storedUser }, { withCredentials: true });
                 if (!response.data.verified) {
                     toast.error("Your Session has expired Login again");
-                    setLoading(true);
                     navigate("/login");
-                } else {
-                    setLoading(true);
                 }
             } catch (err) {
                 const msg = err.response?.data?.error || err.response?.data?.message || "Something went wrong";
                 toast.error(msg);
                 console.log(err.message);
-                setLoading(true);
                 navigate("/login");
+            } finally {
+                setLoading(true);
             }
         }
-        !storedUser && getUserToken();
+        (!storedUser || firstTime) && getUserToken();
     }, []);
 
     useEffect(() => {
@@ -53,7 +51,7 @@ export const Home = () => {
         }
     }, [currentActiveIcon]);
 
-    if(!loading) {
+    if (!loading) {
         return <Loader />
     }
 
