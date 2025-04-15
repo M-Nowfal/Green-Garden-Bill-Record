@@ -36,11 +36,14 @@ export const WaterBillHistory = () => {
         getWaterBillHistory();
     }, []);
 
+    if (!loading) {
+        return <Loader />;
+    }
+
     return (
         <div className={`${theme ? "light-theme" : "dark-theme"} min-vh-100`}>
             <div className="container">
                 <div className="row">
-                    {!loading && <Loader />}
                     <div className="text-center pt-5">
                         {loading && years.map(year => (
                             <div key={year}>
