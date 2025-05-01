@@ -60,6 +60,7 @@ export const OTPVerification = () => {
                     navigate("/newpwd", { state: { email: userDetails.email } });
                 } else if (auth === "login" || auth === "register") {
                     setFirstTime(false);
+                    navigate("/");
                 } else navigate("/");
             }
         } catch (err) {
